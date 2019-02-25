@@ -5,7 +5,6 @@ import com.bupt.dc.dao.jpa.AccountSumRepository;
 import com.bupt.dc.dao.jpa.UserRepository;
 import com.bupt.dc.object.auth.User;
 import com.bupt.dc.object.constant.CategoryEnum;
-import com.bupt.dc.object.constant.KeepAccountConstant;
 import com.bupt.dc.object.dataobject.AccountRecord;
 import com.bupt.dc.object.dataobject.AccountSum;
 import lombok.extern.slf4j.Slf4j;
@@ -68,8 +67,7 @@ public class ScheduledTask {
                 accountSumNew.setSum(accountRecord.getAmount());
                 accountSumNew.setCategory(accountRecord.getCategory());
                 accountSumNew.setDate(yesterday);
-                accountSumNew.setType(Arrays.asList(KeepAccountConstant.CATEGORY_EXPENSE).contains(accountRecord.getCategory()) ?
-                    KeepAccountConstant.TYPE_EXPENSE : KeepAccountConstant.TYPE_INCOME);
+                accountSumNew.setType(accountRecord.getType());
                 accountSumNew.setUser(user);
                 accountSums.add(accountSumNew);
             }
