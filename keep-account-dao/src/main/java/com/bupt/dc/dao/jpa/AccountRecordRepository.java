@@ -10,4 +10,5 @@ import java.util.List;
 public interface AccountRecordRepository extends JpaRepository<AccountRecord, Long> {
 
     List<AccountRecord> findByUserAndDate(User user, LocalDate localDate);
+
 }

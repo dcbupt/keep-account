@@ -32,7 +32,7 @@ public class AccountSum {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @JsonIgnoreProperties(value = {"accountRecords"})
+    @JsonIgnoreProperties(value = {"accountSums"})
     private User user;
 
     @NonNull
