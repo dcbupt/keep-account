@@ -86,10 +86,8 @@ public class User {
         //T t = JSONObject.parseObject((String)jsonObject.get("2019-022"), T.class);
         //System.out.println(JSONObject.toJSONString(t));
 
-        StringBuilder stringBuilder = new StringBuilder("123|");
-
-        System.out.println(stringBuilder.substring(0,stringBuilder.length()-1));
-        System.out.println(Boolean.TRUE.equals(null));
+        System.out.println(87102435%64);
+        System.out.println(new Date(1551196799000L));
     }
 
     @Data

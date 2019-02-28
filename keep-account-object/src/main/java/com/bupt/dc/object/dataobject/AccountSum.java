@@ -52,4 +52,11 @@ public class AccountSum {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate date;
 
+    @NonNull
+    @Column(nullable = false)
+    private String duration;
+
+    public AccountSum(@NonNull String duration) {
+        this.duration = duration;
+    }
 }

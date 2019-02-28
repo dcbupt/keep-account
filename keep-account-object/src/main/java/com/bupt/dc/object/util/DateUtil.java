@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAdjusters;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -31,8 +32,22 @@ public class DateUtil {
         return LocalDate.parse(date, formatter);
     }
 
+    public static LocalDate getFirstDayOfMonth(String month) {
+        String dateFormat = month+"-01";
+        LocalDate localDate = formatDate(dateFormat);
+        LocalDate start = localDate.with(TemporalAdjusters.firstDayOfMonth());
+        return start;
+    }
+
+    public static LocalDate getLastDayOfMonth(String month) {
+        String dateFormat = month+"-01";
+        LocalDate localDate = formatDate(dateFormat);
+        LocalDate end = localDate.with(TemporalAdjusters.lastDayOfMonth());
+        return end;
+    }
+
     public static void main(String[] a) throws ParseException {
-        formatDate("2019-01-21");
+        System.out.println(getLastDayOfMonth("2019-02").toString());
     }
 
 }
