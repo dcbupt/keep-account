@@ -86,8 +86,16 @@ public class User {
         //T t = JSONObject.parseObject((String)jsonObject.get("2019-022"), T.class);
         //System.out.println(JSONObject.toJSONString(t));
 
-        System.out.println(87102435%64);
-        System.out.println(new Date(1551196799000L));
+        //System.out.println(87102435%64);
+        //System.out.println(new Date(1551196799000L));
+        //String s = "123_456_7899";
+        //System.out.println(s.replace("123_456_",""));
+
+        System.out.println(new Date(1552406400807L));
+        String s = "1234_";
+        System.out.println(s.substring(0,s.length()-1));
+
+        System.out.println(2607891656L%10000%256);
     }
 
     @Data

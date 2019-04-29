@@ -1,4 +1,4 @@
-package com.bupt.dc.config.config;
+package com.bupt.dc.config.config.redis;
 
 import com.alibaba.fastjson.support.spring.FastJsonRedisSerializer;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;

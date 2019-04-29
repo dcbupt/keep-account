@@ -1,4 +1,4 @@
-package com.bupt.dc.config.config;
+package com.bupt.dc.config.config.mysql;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;

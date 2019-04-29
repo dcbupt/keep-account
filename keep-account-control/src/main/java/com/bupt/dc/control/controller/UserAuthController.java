@@ -1,10 +1,10 @@
 package com.bupt.dc.control.controller;
 
-import com.bupt.dc.object.constant.RoleEnum;
 import com.bupt.dc.dao.jpa.RoleRepository;
 import com.bupt.dc.dao.jpa.UserRepository;
 import com.bupt.dc.object.auth.Role;
 import com.bupt.dc.object.auth.User;
+import com.bupt.dc.object.constant.RoleEnum;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
@@ -41,7 +40,6 @@ public class UserAuthController {
 
     @ApiOperation(value="获取用户列表", notes="查询用户列表")
     @RequestMapping(value="/list", method=RequestMethod.GET)
-    //@ResponseBody
     @PreAuthorize("hasRole('ADMIN')")
     public List<User> getUserList() {
         List<User> r = userRepository.findAll();
@@ -51,7 +49,6 @@ public class UserAuthController {
     @ApiOperation(value="用户登录", notes="用户登录")
     @ApiImplicitParam(name = "user", value = "用户详细实体user", required = true, dataType = "User")
     @RequestMapping(value="/login", method=RequestMethod.GET)
-    @ResponseBody
     public Boolean login(@RequestBody User user) {
         User u = userRepository.findByUsername(user.getUsername());
         if (!Objects.isNull(u) && passwordEncoder.matches(user.getPassword(), u.getPassword())) {
@@ -64,7 +61,6 @@ public class UserAuthController {
     @ApiOperation(value="注册用户", notes="注册用户")
     @ApiImplicitParam(name = "user", value = "用户详细实体user", required = true, dataType = "User")
     @RequestMapping(value="/create", method=RequestMethod.POST)
-    @ResponseBody
     public void postUser(@RequestBody User user) {
         // 处理"/users/"的POST请求，用来创建User
         // 除了@ModelAttribute绑定参数之外，还可以通过@RequestParam从页面中传递参数
@@ -78,7 +74,6 @@ public class UserAuthController {
     @ApiOperation(value="获取用户详细信息", notes="根据url的id来获取用户详细信息")
     @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long", paramType = "path")
     @RequestMapping(value="/{id}", method=RequestMethod.GET)
-    @ResponseBody
     @PreAuthorize("hasRole('USER')")
     public User getUser(@PathVariable Long id) {
         return userRepository.findById(id).get();
@@ -92,7 +87,6 @@ public class UserAuthController {
         @ApiImplicitParam(name = "user", value = "用户详细实体user", required = true, dataType = "User")
     })
     @RequestMapping(value="/{id}", method=RequestMethod.PUT)
-    @ResponseBody
     @PreAuthorize("hasRole('USER')")
     public void putUser(@PathVariable Long id, @RequestBody User user) {
         User u = userRepository.findById(id).get();
@@ -105,7 +99,6 @@ public class UserAuthController {
     @ApiOperation(value="删除用户", notes="根据url的id来指定删除对象")
     @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long", paramType = "path")
     @RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-    @ResponseBody
     @PreAuthorize("hasRole('ADMIN')")
     public void deleteUser(@PathVariable Long id) {
         userRepository.deleteById(id);

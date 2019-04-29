@@ -19,6 +19,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.time.LocalDate;
 
+/**
+ * 用户在特定类目下一天的消费/收入总金额
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -33,6 +36,7 @@ public class AccountSum {
     @ManyToOne
     @JoinColumn(name = "user_id")
     @JsonIgnoreProperties(value = {"accountSums"})
+    @NonNull
     private User user;
 
     @NonNull

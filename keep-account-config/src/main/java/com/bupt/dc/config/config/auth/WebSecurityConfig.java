@@ -1,6 +1,5 @@
-package com.bupt.dc.config.config;
+package com.bupt.dc.config.config.auth;
 
-import com.bupt.dc.config.config.auth.AuthenticationFilter;
 import com.bupt.dc.config.config.auth.provider.LoginAuthenticationProvider;
 import com.bupt.dc.config.config.auth.provider.TokenAuthenticateProvider;
 import com.bupt.dc.config.utils.JwtUtil;

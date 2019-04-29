@@ -48,7 +48,6 @@ public class AccountRecord {
     @Column(nullable = false)
     private Long amount;
 
-    @NonNull
     @Column
     private String remark;
 

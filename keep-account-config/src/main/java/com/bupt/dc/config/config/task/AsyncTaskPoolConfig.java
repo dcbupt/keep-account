@@ -1,4 +1,4 @@
-package com.bupt.dc.config.config;
+package com.bupt.dc.config.config.task;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
