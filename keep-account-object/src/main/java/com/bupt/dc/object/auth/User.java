@@ -31,7 +31,14 @@ import java.util.Set;
 @Entity
 public class User {
 
-    public User(Long id) { this.id = id; }
+    public User(Long id) {this.id = id;}
+
+    public User(Long id, String username, String password, Date createDate) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.createDate = createDate;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

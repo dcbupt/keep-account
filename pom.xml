@@ -28,7 +28,7 @@
         <java.version>1.8</java.version>
         <lombok.version>1.18.4</lombok.version>
         <mockito.version>2.23.4</mockito.version>
-        <swagger2.version>2.9.2</swagger2.version>
+        <swagger2.version>2.5.0</swagger2.version>
         <fastjson.version>1.2.54</fastjson.version>
         <mysql.conn.version>8.0.11</mysql.conn.version>
         <commons-pool2.version>2.4.2</commons-pool2.version>
@@ -113,6 +113,27 @@
             <version>3.2.2</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>28.0-jre</version>
+        </dependency>
+
+        <!-- 先声明jmockit的依赖 -->
+        <dependency>
+            <groupId>org.jmockit</groupId>
+            <artifactId>jmockit</artifactId>
+            <version>1.36</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- 再声明junit的依赖 -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
 
@@ -169,6 +190,15 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
+            <!--<plugin>-->
+                <!--<artifactId>maven-surefire-plugin</artifactId>-->
+                <!--<version>2.20</version>-->
+                <!--<configuration>-->
+                    <!--<disableXmlReport>true</disableXmlReport>-->
+                    <!--<argLine>-Dcoverage-metrics=all</argLine>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
         </plugins>
     </build>
 

@@ -34,7 +34,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
         ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
-
+        log.info("AuthenticationFilter|doFilter|enter|url:{}", ((HttpServletRequest)request).getRequestURL());
         try {
             if (isLoginRequest(httpRequest, httpResponse)) {
                 Authentication authResult = processLogin(httpRequest, httpResponse);
@@ -114,7 +114,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
         if (responseAuth == null || !responseAuth.isAuthenticated()) {
             throw new InternalAuthenticationServiceException("Unable to authenticate Domain User for provided credentials");
         }
-        log.debug("User successfully authenticated");
+        log.info("User successfully authenticated");
         return responseAuth;
     }
 

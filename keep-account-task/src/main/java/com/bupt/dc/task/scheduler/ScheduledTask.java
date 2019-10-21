@@ -8,6 +8,12 @@ import com.bupt.dc.object.constant.CategoryEnum;
 import com.bupt.dc.object.constant.KeepAccountConstant;
 import com.bupt.dc.object.dataobject.AccountRecord;
 import com.bupt.dc.object.dataobject.AccountSum;
+import com.bupt.dc.object.factory.AbstractFactory;
+import com.bupt.dc.object.factory.FactoryMaker;
+import com.bupt.dc.object.processor.annotation.BizProcessChooser;
+import com.bupt.dc.object.processor.annotation.BizTypeEnum;
+import com.bupt.dc.object.processor.linked.DefaultProcessorManager;
+import com.bupt.dc.object.processor.ProcessorRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.retry.annotation.Backoff;
@@ -23,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -37,6 +44,12 @@ public class ScheduledTask {
 
     @Resource
     private AccountSumRepository accountSumRepository;
+
+    @Resource
+    private DefaultProcessorManager defaultProcessorManager;
+
+    @Resource
+    private FactoryMaker factoryMaker;
 
     /**
      * 每日0点执行任务：
@@ -113,5 +126,33 @@ public class ScheduledTask {
     @Recover
     public void testRetryRecovery(ArithmeticException exception) {
         log.info("enter recovery");
+    }
+
+    @Scheduled(cron = "00 17 15 * * ?")
+    public void testProcessor() {
+        log.info("start testProcessor");
+        ProcessorRequest request = new ProcessorRequest();
+        request.setBizCode("test");
+        request.setRequest(new Object());
+        defaultProcessorManager.processor(request);
+    }
+
+    @Scheduled(cron = "00 54 14 * * ?")
+    public void testFactory() {
+        log.info("start testFactory");
+        AbstractFactory factory = factoryMaker.makeFactory();
+        factory.createDefaultComponent();
+    }
+
+    @Scheduled(cron = "00 56 16 * * ?")
+    public void testAnnotationProcess() {
+        log.info("start testAnnotationProcess");
+        Optional.ofNullable(BizProcessChooser.getBizProcessorMap().get(BizTypeEnum.DEFAULT.name())).
+            ifPresent(bizProcessors -> {
+                bizProcessors.forEach(bizProcessor -> {
+                    ProcessorRequest request = new ProcessorRequest();
+                    bizProcessor.process(request);
+                });
+            });
     }
 }

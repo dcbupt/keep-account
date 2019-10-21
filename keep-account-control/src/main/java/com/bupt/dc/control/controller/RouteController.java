@@ -19,6 +19,11 @@ public class RouteController {
         return "index";
     }
 
+    /**
+     * 全局跨域配置优先级高于这里,这种配置方式对spring security控制的访问路径下的跨域问题不生效
+     * @return
+     */
+    //@CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/login")
     public String login(){
         return "login";

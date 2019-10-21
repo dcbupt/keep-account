@@ -61,7 +61,7 @@
     </appender>
 
 
-    <logger name="mongodb" level="INFO" additivity="false">
+    <logger name="mongoLogger" level="INFO" additivity="false">
         <appender-ref ref="mongoAppender" />
     </logger>
 

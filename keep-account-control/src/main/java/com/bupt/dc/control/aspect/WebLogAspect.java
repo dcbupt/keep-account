@@ -26,7 +26,7 @@ import java.util.Map;
 @Component
 public class WebLogAspect {
 
-    private static final Logger log = LoggerFactory.getLogger("mongodb");
+    private static final Logger log = LoggerFactory.getLogger("mongoLogger");
 
     private static final Logger basicLog = LoggerFactory.getLogger(WebLogAspect.class);
 

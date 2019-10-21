@@ -1,9 +1,9 @@
 > 数据初始化
 - DataInit 
 
-        spring实例化bean时，执行init方法，初始化基础数据
-        从application.properties读取角色，初始化角色表
-        从application.properties读取ADMIN用户数据，初始化用户表
+        spring实例化bean时，执行init方法，初始化用于权限管理的数据
+            从application.properties读取角色，初始化角色表
+            从application.properties读取ADMIN用户数据，初始化用户表
 <br>    
                
 > 日志重定向到mongodb
@@ -21,6 +21,13 @@
 
         从application.properties读取多个数据库连接参数，初始化DataSource
         @Primary指定主数据源
+        
+        
+- MultipleMongoConfig
+
+        MongoDB多数据源配置
+        从application.properties读取数据库连接参数，初始化Template
+        为特定package下的Repository指定使用的MongoTemplate
 <br>  
         
 > Redis
@@ -28,10 +35,16 @@
 
         application.properties定义Redis服务器连接参数
         初始化两个RedisTemplate
+        
+        redis在mac的客户端：redis desktop manager
 <br>  
         
 > RestApiDoc
 - Swagger2Config
+
+        访问http://localhost:${port}/swagger-ui.html查看swagger2生成的apiDoc
+        如果无法访问，修改依赖swagger2的版本，一般是版本过高导致的
+        如果页面无法展示apiDoc，一种情况是增强ResponseBody导致的，把相关切面类注了可以暂时解决问题
   
 <br>
         
@@ -76,6 +89,12 @@
 - MyExceptionHandler
 
         对Controller层的方法里抛出的特定类型异常，自定义处理逻辑，本质还是基于切面处理
+   
+        
+> 测试框架
+- JMockit + JUnit
+
+        测试SpringBootTest环境的测试类时，干掉maven-surefire-plugin（JMockIt提供的测试覆盖率统计插件）
 
         
         

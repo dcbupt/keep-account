@@ -18,6 +18,11 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 @EnableConfigurationProperties(RedisProperties.class)
 public class RedisConfig {
 
+    /**
+     * ConditionalOnMissingBean是在springIoC容器里没有redisTemplate实例时，才装载这里的bean
+     * @param redisConnectionFactory
+     * @return
+     */
     @Bean
     @ConditionalOnMissingBean(name = "redisTemplate")
     public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {

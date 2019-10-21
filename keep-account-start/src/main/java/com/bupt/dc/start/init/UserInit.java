@@ -1,10 +1,10 @@
 package com.bupt.dc.start.init;
 
-import com.bupt.dc.object.constant.RoleEnum;
 import com.bupt.dc.config.properties.SystemProperties;
 import com.bupt.dc.dao.jpa.RoleRepository;
 import com.bupt.dc.object.auth.Role;
 import com.bupt.dc.object.auth.User;
+import com.bupt.dc.object.constant.RoleEnum;
 import com.bupt.dc.task.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 

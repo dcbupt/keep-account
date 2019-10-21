@@ -16,6 +16,11 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity // 开启 Security
@@ -86,14 +91,35 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
             .formLogin()
             //.successHandler(new ForwardAuthenticationSuccessHandler("/home"))
-            .loginPage("/login").permitAll()
-            .defaultSuccessUrl("/home")
+            .loginPage("/login")
+            //.permitAll()
+            //.defaultSuccessUrl("/home")
             //.defaultSuccessUrl("/process.html")
             //.failureUrl("/logout.html")
             .and()
-            .addFilter(authenticationFilter())
+            // 支持跨域
+            .cors()
+            .and()
+            .addFilter(authenticationFilter());
+
         ;
 
     }
+
+    /**
+     * 全局跨域配置，对spring security控制的带访问权限校验的路径的跨域问题依然生效
+     * @return
+     */
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+
+      CorsConfiguration corsConfiguration = new CorsConfiguration();
+      corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
+      corsConfiguration.setAllowedMethods(Arrays.asList("GET", "POST"));
+      UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+      source.registerCorsConfiguration("/**", corsConfiguration);
+      return source;
+    }
+
 
 }
